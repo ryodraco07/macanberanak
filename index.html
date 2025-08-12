@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Landing Page Daftar Akun - Versi Mobile</title>
+<style>
+  body, html {
+    margin: 0; padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #000000;
+    color: #0a84ff;
+  }
+  .container {
+    max-width: 480px;
+    margin: 40px auto 80px;
+    background: transparent;
+    padding: 20px 25px;
+    text-align: center;
+  }
+
+  /* Desktop */
+  @media (min-width: 769px) {
+    body {
+      background-color: #000;
+      color: #0a84ff;
+    }
+    .container {
+      max-width: none;
+      margin: 150px auto;
+      padding: 0;
+    }
+    .desktop-only {
+      display: block;
+      font-size: 4rem;
+      font-weight: 900;
+      letter-spacing: 6px;
+      user-select: none;
+    }
+    .mobile-only {
+      display: none;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .desktop-only {
+      display: none;
+    }
+    .mobile-only {
+      display: block;
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 15px;
+      color: #0a84ff;
+      user-select: none;
+      text-transform: uppercase;
+    }
+    p.lead-text {
+      font-size: 1.2rem;
+      line-height: 1.5;
+      margin-bottom: 30px;
+      color: #4da0ff;
+      font-weight: 600;
+      user-select: none;
+    }
+    .menu-choice {
+      background: #111111;
+      border: 2px solid #0a84ff;
+      border-radius: 12px;
+      margin: 14px 0;
+      padding: 20px 0;
+      font-weight: 900;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: #0a84ff;
+      transition: background-color 0.3s, color 0.3s;
+      user-select: none;
+      letter-spacing: 1.2px;
+    }
+    .menu-choice:hover,
+    .menu-choice.active {
+      background-color: #0a84ff;
+      color: #000000;
+    }
+    .btn-submit {
+      margin-top: 35px;
+      background-color: #0a84ff;
+      color: #000;
+      border: none;
+      border-radius: 16px;
+      padding: 20px 0;
+      font-weight: 900;
+      font-size: 1.9rem;
+      width: 100%;
+      cursor: pointer;
+      box-shadow: 0 7px 18px #0a84ffaa;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      letter-spacing: 1.1px;
+    }
+    .btn-submit:hover {
+      background-color: #0663d4;
+      box-shadow: 0 9px 24px #0663d4aa;
+    }
+    img.responsive-img {
+      margin-top: 45px;
+      width: 100%;
+      border-radius: 12px;
+      user-select: none;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Desktop version -->
+<div class="container desktop-only" role="main" aria-label="Segera daftar">
+  SEGERA DAFTAR
+</div>
+
+<!-- Mobile version -->
+<div class="container mobile-only" role="main" aria-label="Menu daftar akun">
+  <h1>RAIH KEUNGGULAN EKSKLUSIF</h1>
+  <p class="lead-text">
+    Jangan lewatkan kesempatan langka untuk masuk ke dunia permainan yang penuh tantangan dan hadiah fantastis.<br />
+    Daftar akun sekarang dan buktikan sendiri kenikmatan bermain dengan layanan premium yang siap mendampingi kamu setiap saat!
+  </p>
+
+  <div class="menu-choice" tabindex="0" role="button" aria-pressed="false" data-value="vvip">DAFTAR AKUN VVIP</div>
+  <div class="menu-choice" tabindex="0" role="button" aria-pressed="false" data-value="jepe">DAFTAR AKUN JEPE</div>
+
+  <button class="btn-submit" aria-label="Klik daftar sekarang">KLIK DAFTAR SEKARANG</button>
+
+  <img src="bahan1.png" alt="Gambar bahan" class="responsive-img" />
+</div>
+
+<script>
+  const choices = document.querySelectorAll('.menu-choice');
+  let selectedValue = null;
+
+  choices.forEach(choice => {
+    choice.addEventListener('click', () => {
+      choices.forEach(c => {
+        c.classList.remove('active');
+        c.setAttribute('aria-pressed', 'false');
+      });
+      choice.classList.add('active');
+      choice.setAttribute('aria-pressed', 'true');
+      selectedValue = choice.getAttribute('data-value');
+    });
+    choice.addEventListener('keypress', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        choice.click();
+      }
+    });
+  });
+
+  const btn = document.querySelector('.btn-submit');
+  btn.addEventListener('click', () => {
+    if(!selectedValue) {
+      alert('Silakan pilih jenis akun terlebih dahulu, bosku!');
+      return;
+    }
+    let url = 'https://figurpusat.com/?Ref=HkWDXI8W';
+    if(selectedValue === 'vvip') {
+      url = 'https://figurpusat.com/?Ref=HkWDXI8W&account=vvip';
+    } else if(selectedValue === 'jepe') {
+      url = 'https://figurpusat.com/?Ref=HkWDXI8W&account=jepe';
+    }
+    window.open(url, '_blank');
+  });
+</script>
+
+</body>
+</html>
